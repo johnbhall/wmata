@@ -5,7 +5,7 @@ class TestResource < Test::Unit::TestCase
   end
   
   def setup
-    @fake = Faker.new("method1" => "win", "MethodTwo" => "epic")
+    @fake = Faker.new("method1" => "win", "MethodTwo" => "epic", "NilValue" => nil)
   end
   
   def test_method_mapping
@@ -17,6 +17,12 @@ class TestResource < Test::Unit::TestCase
   def test_method_mapping_with_camel_case
     assert_nothing_raised do
       assert_equal "epic", @fake.method_two
+    end
+  end
+  
+  def test_method_mapping_with_nil_value
+    assert_nothing_raised do
+      assert_nil @fake.nil_value
     end
   end
   

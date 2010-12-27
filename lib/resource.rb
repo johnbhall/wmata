@@ -31,7 +31,13 @@ module WMATA
 
     def method_missing(m, *args)
       camel_cased = m.to_s.gsub(/\/(.?)/) { "::#{$1.upcase}" }.gsub(/(?:^|_)(.)/) { $1.upcase }
-      @attrs[m.to_s] or @attrs[camel_cased] or super
+      if @attrs.has_key? m.to_s
+        @attrs[m.to_s]
+      elsif @attrs.has_key? camel_cased
+        @attrs[camel_cased]
+      else
+        super
+      end
     end
   end
 end
