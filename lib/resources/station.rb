@@ -29,12 +29,12 @@ module WMATA
     # Get all possible codes for this station (some stations are in together with another so
     # they are technically identified by two station codes).
     def codes
-      [@attrs['Code'], @attrs['StationTogether1'], @attrs['StationTogether2']].compact
+      [@attrs['Code'], @attrs['StationTogether1'], @attrs['StationTogether2']].compact - [""]
     end
     
     # Get the line codes for this station (some stations serve more than one line).
     def line_codes
-      [@attrs['LineCode1'], @attrs['LineCode2'], @attrs['LineCode3'], @attrs['LineCode4']].compact
+      [@attrs['LineCode1'], @attrs['LineCode2'], @attrs['LineCode3'], @attrs['LineCode4']].compact - [""]
     end
     
     # Get +Line+ instances for the lines serviced by this station.

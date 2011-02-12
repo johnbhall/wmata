@@ -28,6 +28,11 @@ class TestStation < Test::Unit::TestCase
     assert_equal ["A1", "D1"], station.codes.sort    
   end
   
+  def test_codes_with_empty_strings
+    station = WMATA::Station.new("Code" => "A1", "StationTogether1" => "C2", "StationTogether2" => "")
+    assert_equal ["A1", "C2"], station.codes.sort
+  end
+  
   def test_line_codes
     station = WMATA::Station.new("LineCode1" => "RD", "LineCode2" => "BL", "LineCode3" => "GR", "LineCode4" => "OR")
     assert_equal ["BL", "GR", "OR", "RD"], station.line_codes.sort
@@ -36,6 +41,11 @@ class TestStation < Test::Unit::TestCase
   def test_line_codes_with_partial_set
     station = WMATA::Station.new("LineCode1" => "RD", "LineCode3" => "GR", "LineCode4" => "OR")
     assert_equal ["GR", "OR", "RD"], station.line_codes.sort    
+  end
+  
+  def test_line_codes_with_empty_strings
+    station = WMATA::Station.new("LineCode1" => "RD", "LineCode2" => "BL", "LineCode3" => "GR", "LineCode4" => "")
+    assert_equal ["BL", "GR", "RD"], station.line_codes.sort
   end
   
   def test_lines
